@@ -5,6 +5,7 @@ using System.Text;
 using System.Web;
 using Shadowsocks.Controller;
 using System.Text.RegularExpressions;
+using Newtonsoft.Json;
 
 namespace Shadowsocks.Model
 {
@@ -109,6 +110,12 @@ namespace Shadowsocks.Model
             server.server = details.Groups["hostname"].Value;
             server.server_port = int.Parse(details.Groups["port"].Value);
             return server;
+        }
+
+        public static List<Server> GetServersFromJson(string ssURL)
+        {
+            List<Server> servers = (List<Server>)JsonConvert.DeserializeObject<List<Server>>(ssURL);
+            return servers;
         }
 
         public static List<Server> GetServers(string ssURL)

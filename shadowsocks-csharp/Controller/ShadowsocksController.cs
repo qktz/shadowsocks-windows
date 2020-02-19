@@ -194,10 +194,11 @@ namespace Shadowsocks.Controller
                 if (ssURL.IsNullOrEmpty() || ssURL.IsWhiteSpace())
                     return false;
 
-                var servers = Server.GetServers(ssURL);
+                var servers = Server.GetServersFromJson(ssURL);
                 if (servers == null || servers.Count == 0)
                     return false;
 
+                _config.configs.Clear();
                 foreach (var server in servers)
                 {
                     _config.configs.Add(server);
